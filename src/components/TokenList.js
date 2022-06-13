@@ -1,4 +1,4 @@
-import Erc721 from "./Erc721";
+import Erc721 from "../Erc721";
 
 function TokenList({erc721list }) {
     return (

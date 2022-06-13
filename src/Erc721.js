@@ -1,3 +1,4 @@
+
 function Erc721({ erc721list }) {
     return (
         <div className="erc721list">

@@ -2,14 +2,15 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import erc721Abi from "./erc721Abi";
-import Erc721 from "./Erc721";
 import TokenList from './components/TokenList';
+import Erc721 from "./Erc721";
 
 
 function App() {
   const [account, setAccount] = useState("");
   const [web3, setWeb3] = useState();
-  const [newErc721addr, setNewErc721Addr] = useState();
+  const [newErc721addr, setNewErc721addr] = useState();
+  const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
 
   const addNewErc721Token = async () => {
 		// 생략
@@ -63,6 +64,7 @@ function App() {
     setAccount(accounts[0]);
   };
 
+
   return (
     <div className="App">
       <button
@@ -101,5 +103,6 @@ function App() {
 
   );
 }
+
 
 export default App;
