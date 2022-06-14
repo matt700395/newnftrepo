@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import erc721Abi from "./erc721Abi";
 import TokenList from './components/TokenList';
-import Erc721 from "./Erc721";
 
 
 function App() {
@@ -71,38 +70,24 @@ function App() {
         className="metaConnect"
         onClick={() => {
           connectWallet();
-        }}>
+        }}
+      >
         connect to MetaMask
       </button>
       {/* // 연결된 계정 주소를 화면에 출력합니다 */}
       <div className="userInfo">주소: {account}</div>
-      <div>
-      <input
-	        type="text"
-	        onChange={(e) => {
-	            setNewErc721addr(e.target.value);  // 입력받을 때마다 newErc721addr 갱신
-	        }}
-	    ></input>
-	    <button onClick={addNewErc721Token}>add new erc721</button>
-
       <div className="newErc721">
-      <input
+        <input
           type="text"
           onChange={(e) => {
-              setNewErc721addr(e.target.value);  // 입력받을 때마다 newErc721addr 갱신
+            setNewErc721addr(e.target.value);
           }}
-      ></input>
-      <button onClick={addNewErc721Token}>add new erc721</button>
-        </div>  
+        ></input>
+        <button onClick={addNewErc721Token}>add new Erc721</button>
       </div>
-
-      <TokenList erc721list={erc721list} />
-
+      <TokenList web3={web3} account={account} erc721list={erc721list} />
     </div>
-
-
   );
 }
-
 
 export default App;

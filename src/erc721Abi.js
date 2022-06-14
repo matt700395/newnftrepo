@@ -1,4 +1,5 @@
 // src/erc721Abi.js
+
 let erc721Abi = [
     {
     "anonymous": false,
@@ -53,5 +54,7 @@ let erc721Abi = [
     "type": "function"
     }
     ] // 복사한 ABI를 할당
+
+
 export default erc721Abi;
 
