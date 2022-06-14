@@ -11,38 +11,6 @@ function App() {
   const [newErc721addr, setNewErc721addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
 
-  const addNewErc721Token = async () => {
-		// 생략
-			let arr = [];
-
-      const tokenContract = await new web3.eth.Contract(
-        erc721Abi,
-        newErc721addr
-       );
-
-       const name = await tokenContract.methods.name().call();
-       const symbol = await tokenContract.methods.symbol().call();
-       const totalSupply = await tokenContract.methods.totalSupply().call();
-
-		  for (let i = 1; i <= totalSupply; i++) {
-		      arr.push(i);
-		  }
-		  
-		  for (let tokenId of arr) {
-		      let tokenOwner = await tokenContract.methods
-		          .ownerOf(tokenId)
-		          .call();
-		      if (String(tokenOwner).toLowerCase() === account) {
-		          let tokenURI = await tokenContract.methods
-		              .tokenURI(tokenId)
-		              .call();
-		          setErc721list((prevState) => {
-		              return [...prevState, { name, symbol, tokenId, tokenURI }];
-		          });
-		      }
-		  }
-	}
-
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {// window.ethereum이 있다면
       try {
@@ -62,6 +30,39 @@ function App() {
 
     setAccount(accounts[0]);
   };
+
+  const addNewErc721Token = async () => {
+		// 생략
+      const tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
+
+       const name = await tokenContract.methods.name().call();
+       const symbol = await tokenContract.methods.symbol().call();
+       const totalSupply = await tokenContract.methods.totalSupply().call();
+
+
+      let arr = [];
+		  for (let i = 1; i <= totalSupply; i++) {
+		      arr.push(i);
+		  }
+		  
+		  for (let tokenId of arr) {
+		      let tokenOwner = await tokenContract.methods
+		          .ownerOf(tokenId)
+		          .call();
+		      if (String(tokenOwner).toLowerCase() === account) {
+		          let tokenURI = await tokenContract.methods
+		              .tokenURI(tokenId)
+		              .call();
+		          setErc721list((prevState) => {
+		              return [...prevState, { name, symbol, tokenId, tokenURI }];
+		          });
+		      }
+		  }
+	}
+
+
+
+
 
 
   return (
